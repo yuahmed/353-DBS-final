@@ -5,14 +5,13 @@ CREATE SCHEMA Dining;
 USE Dining;
 
 CREATE TABLE location (
-	location_id	INT,
 	loc_name VARCHAR(15),
-	PRIMARY KEY (location_id)
+	PRIMARY KEY (loc_name)
 );
 
 CREATE TABLE food (
 	food_id INT, 
-	location_id INT,
+	loc_name VARCHAR(15),
 	food_name VARCHAR(50),
 	food_price NUMERIC(4,2), 
 	is_vegan VARCHAR(1),
@@ -20,7 +19,7 @@ CREATE TABLE food (
 	has_gluten VARCHAR(1),
 	has_dairy VARCHAR(1),
 	has_eggs VARCHAR(1),
-	FOREIGN KEY (location_id) REFERENCES location(location_id),
+	FOREIGN KEY (loc_name) REFERENCES location(loc_name),
 	PRIMARY KEY (food_id)
 );
 
