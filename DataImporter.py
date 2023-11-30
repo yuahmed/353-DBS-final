@@ -103,7 +103,7 @@ with open("food.csv", "r", encoding="UTF-8") as file:
 			print("Failed inserting tuple: {}".format(error_descriptor))
 
 		for i in range (91):
-			i_name = row[str(i)]
+			i_name = row[str(i)].lower()
 			if i_name == '':
 				break
 			if not i_name in i_dict:

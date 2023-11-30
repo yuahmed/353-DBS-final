@@ -48,6 +48,7 @@ let foodData = []; // Global variable to store food data and manipulate it
 document.getElementById('foodFetchBtn').addEventListener('click', fetchFoodData);
 function fetchFoodData() {
     var i_name = document.getElementById('i_name').value; // User inputted values
+    i_name = "%" + i_name + "%" // allows for contain searching searching
     var searchParams = new URLSearchParams({ i_name: i_name }); // Stored variables
 
     // Fetches result from querying with users parameters
