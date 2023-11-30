@@ -61,8 +61,8 @@ except mysql.connector.Error as error_descriptor:
 	print("Failed using database: {}".format(error_descriptor))
 	exit(1)
 
-food_map = {}
-ingredients_map = {}
+# could have food_map = {}, but two foods with the same name could have different ingredients
+
 locations = set()
 def add_quotes(str):
 	if str == "NULL":
@@ -70,17 +70,62 @@ def add_quotes(str):
 	else:
 		return "'" + str + "'"
 
+i_dict = {}
+food_id = 0
+ingredient_id = 0
 with open("food.csv", "r", encoding="UTF-8") as file:
 	csvreader = csv.DictReader(file)
 	for row in csvreader:
-		food_id = 0
-		ingredient_id = 0
 
 		# Collect data & insert data for new loser & winner players
 		location = row["location"] # Note: primary keys have to be not null, so don't need to call to_null
 		if location not in locations:
 			locations.add(location)
 			data_string = "INSERT INTO location VALUES ('%s');" % (location)
+			try: 
+				cursor.execute(data_string)
+			except mysql.connector.Error as error_descriptor:
+				print("Failed inserting tuple: {}".format(error_descriptor))
+		
+		food_name = row["food"]
+		food_price = row["price"] # number, so doesn't need quotes despite null possibility
+		is_vegan = add_quotes(row["vegan"])
+		is_vegetarian = add_quotes(row["vegetarian"])
+		has_gluten = add_quotes(row["gluten"])
+		has_dairy = add_quotes(row["dairy"])
+		has_eggs = add_quotes(row["eggs"])
+		data_string = "INSERT INTO food VALUES (%s, '%s', '%s', %s, %s, %s, %s, %s, %s);" % \
+			(food_id, location, food_name, food_price, is_vegan, is_vegetarian, has_gluten, has_dairy, has_eggs)
+		
+		try: 
+			cursor.execute(data_string)
+		except mysql.connector.Error as error_descriptor:
+			print("Failed inserting tuple: {}".format(error_descriptor))
+
+		for i in range (91):
+			i_name = row[str(i)]
+			if i_name == '':
+				break
+			if not i_name in i_dict:
+				i_dict[i_name] = ingredient_id
+				data_string =  "INSERT INTO ingredients VALUES (%s, '%s');" % (ingredient_id, i_name)
+				try: 
+					cursor.execute(data_string)
+				except mysql.connector.Error as error_descriptor:
+					print("Failed inserting tuple: {}".format(error_descriptor))
+				ingredient_id = ingredient_id + 1
+			data_string = "INSERT INTO contains VALUES (%s, %s);" % (food_id, i_dict[i_name])
+			try: 
+				cursor.execute(data_string)
+			except mysql.connector.Error as error_descriptor:
+				print("Failed inserting tuple: {}".format(error_descriptor))
+		
+		food_id = food_id + 1
+
+
+
+
+
 
 # Commit and close
 cursor.close()

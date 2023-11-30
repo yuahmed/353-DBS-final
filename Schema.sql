@@ -25,7 +25,7 @@ CREATE TABLE food (
 
 CREATE TABLE ingredients (
 	ingredient_id INT,
-	i_name VARCHAR(50),
+	i_name VARCHAR(200),
 	PRIMARY KEY (ingredient_id)
 );
 
@@ -34,5 +34,5 @@ CREATE TABLE contains (
 	ingredient_id INT,
 	FOREIGN KEY (food_id) REFERENCES food (food_id),
 	FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
-	PRIMARY KEY(food_id, ingredient_id),
+	PRIMARY KEY(food_id, ingredient_id)
 );
