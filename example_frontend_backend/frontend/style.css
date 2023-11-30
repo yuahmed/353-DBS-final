@@ -1,0 +1,4 @@
+/* Adds borders to tables */
+table, th, td, tr, tbody {
+    border: 1px solid black;
+}
