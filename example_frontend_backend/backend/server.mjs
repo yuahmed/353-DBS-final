@@ -12,27 +12,11 @@ db.connect();
 app.use(express.static(path.join(path.resolve(), '../frontend')));
 
 // Get results from user requests and perform queries
-app.get('/players', function (request, response) {
-    let playerName = request.query.name
-    db.playerQueryCallback(playerName, (results) => {
+app.get('/foods', function (request, response) {
+    let i_name = request.query.i_name
+    db.foodQueryCallback(i_name, (results) => {
         response.json(results)
     })
-});
-app.get('/tournaments', function (request, response) {
-    let tourneyYear = request.query.year
-    db.tourneyQueryCallback(tourneyYear, (results) => {
-        response.json(results)
-    })
-});
-app.get('/playerStats', function (request, response) {
-    let playerName = request.query.name;
-    let startDate = request.query.startDate;
-    let endDate = request.query.endDate;
-    db.playerStatsQueryCallback(playerName, startDate, endDate, (results) => {
-        console.log('server: ', results.avg_aces)
-        response.json(results)
-    }
-    )
 });
 
 // Starting server; disconnecting from database upon exit

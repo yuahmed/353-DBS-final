@@ -9,38 +9,45 @@
 </head>
 
 <body>
+	<!-- Functionality we may want:
+	1. filtering system to get rid OR have  all options you may not want OR want (allergies, locations, ingredient filterer)
+	2. can click food in table to get other page/drop down/hover menu with more information
+	3. pretty front page that has basic information about dining services (times, links to daily, menu, etc.)
+	4. suggestions box
+	5. list items by user's available budget
+
+
+	a summary:
+		front page,
+			davidson college (logo)
+			socials
+			grubhub 
+		food page,
+		contact us (suggestions) page,
+	-->
+
 	<hr>
-
 	<!--Buttons for chosing sections.-->
-	<button type="button" id="playersBtn"> Players </button>
-	<button type="button" id="tourneyBtn"> Tournaments </button>
-	<button type="button" id="statsBtn"> Player Stats </button>
+	<button type="button" id="homeBtn"> Home </button>
+	<button type="button" id="foodBtn"> Foods </button>
+	<button type="button" id="contactBtn"> Contact </button>
 
-	<!-- players section -->
-	<div id="playersSection">
-		<h1> Player Data by Name </h1>
-		<p> Please input the player name for whom you want information. </p>
-		<form id="playerForm">
-			<label for="name">Name:</label><br>
-			<input type="text" id="name" name="name" placeholder="(required)" required><br>
-			<button type="button" id="playerFetchBtn">Click to display player</button>
-		</form>
-		<table id="playersTable">
-			<!--Information inserted based on user request (see script.js)-->
-		</table>
+	<!-- home section: to be done -->
+	<div id="homeSection">
+		<h1> Welcome to our home page! </h1>
 	</div>
 
 	<!-- tournaments section (hidden by default) -->
-	<div id="tournamentsSection" style="display: none;">
-		<h1> Tourney Data by Year</h1>
-		<p> Please insert the year for which you want tournament information. <p>
-		<form id="tourneyForm">
-			<label for="tYear">Year:</label>
-			<input type="text" id="tYear" name="tYear" placeholder="(required)" required><br>
-			<button type="button" id="tourneyFetchBtn">Click to display tourney information</button>
+	<div id="foodSection" style="display: none;">
+		<h1> Food Data by Ingredient</h1>
+		<p> Please insert the ingredient you want in your food. <p>
+		<form id="foodForm">
+			<label for="i_name">Ingredient Name:</label>
+			<input type="text" id="i_name" name="i_name" placeholder="(required)" required><br>
+			<button type="button" id="foodFetchBtn">Click to display food information</button>
 		</form>
 
-		<!--Buttons for sorting.-->
+		<!-- Buttons for sorting.
 		<button id="sortNameBtn">Sort by Name</button>
 		<button id="reverseSortNameBtn">Reverse Sort by Name</button>
 		<button id="sortDrawBtn">Sort by Draw Size</button>
@@ -48,33 +55,18 @@
 		<button id="sortDateBtn">Sort by Date</button>
 		<button id="reverseSortDateBtn">Reverse Sort by Date</button>
 		<button id="sortLevelBtn">Sort by Level</button>
-		<button id="reverseSortLevelBtn">Reverse Sort by Level</button>
+		<button id="reverseSortLevelBtn">Reverse Sort by Level</button> -->
 
-		<table id="tourneyTable">
+		<table id="foodTable">
 			<!--Information inserted based on user request (see script.js)-->
 		</table>
 
 	</div>
 
-	<!-- player stats Section (hidden by default) -->
-	<div id="statsSection" style="display: none;">
-		<h1> Player Stats Data by Name and Date </h1>
-		<p> Please insert the player name and dates for which you want statistics. <p>
-		<form id="playerStatsForm">
-			<label for="psName">Player Name:</label><br>
-			<input type="text" id="psName" name="psName" placeholder="(required)" required><br>
-
-			<label for="startDate">Start Date:</label><br>
-			<input type="date" id="startDate" name="startDate" required><br>
-
-			<label for="endDate">End Date:</label><br>
-			<input type="date" id="endDate" name="endDate" required><br>
-
-			<button type="button" id="playerStatsFetchBtn">Click to display player stats</button>
-		</form>
-		<Table id="playerStatsTable"> 
-			<!--Information inserted based on user request (see script.js)-->
-		</Table>
+	<!-- Contact Section (hidden by default) -->
+	<div id="contactSection" style="display: none;">
+		<h1> Wanna talk? </h1>
+		<p> Email Oma and complain. <p>
 	</div>
 
 	<script src="script.js"></script>

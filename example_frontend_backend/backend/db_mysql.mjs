@@ -5,32 +5,19 @@ var connection = createConnection({
     host: 'localhost',
     user: 'root',
     password: '123456',
-    database: 'Tennis'
+    database: 'Dining'
 });
 function connect() {
     connection.connect();
 }
 
-// Setting up query for player data, tournament data, and player stats
-function playerQueryCallback(playerName, callback) {
-    connection.query("SELECT * FROM players WHERE player_name = ?", [playerName], (error, results, fields) => {
+// Setting up query for food data
+function foodQueryCallback(i_name, callback) {
+    // make the string contain it instead of be it
+    connection.query("SELECT loc_name, food_name FROM (SELECT loc_name, food_id, food_name, CASE WHEN i_name LIKE ? THEN 1 ELSE 0 END AS is_ingredient FROM food NATURAL JOIN contains NATURAL JOIN ingredients) AS A GROUP BY food_id HAVING SUM(is_ingredient) >= 1", [i_name], (error, results, fields) => {
         if (error) throw error;
         console.log(results)
         callback(results);
-    });
-}
-function tourneyQueryCallback(tourneyYear, callback) {
-    connection.query("SELECT * FROM tournaments WHERE YEAR(start_date) = ?", [tourneyYear], (error, results, fields) => {
-        if (error) throw error;
-        console.log(results)
-        callback(results);
-    });
-}
-function playerStatsQueryCallback(name, startDate, finishDate, callback) {
-    connection.query("CALL ShowAggregateStatistics(?, ?, ?)", [name, startDate, finishDate], (error, results, fields) => {
-        if (error) throw error;
-        console.log(results[0][0])
-        callback(results[0]); // Makes sure we only get tuple with data
     });
 }
 
@@ -43,9 +30,7 @@ function disconnect() {
 export {
     connection,
     connect,
-    playerQueryCallback,
-    tourneyQueryCallback,
-    playerStatsQueryCallback,
+    foodQueryCallback,
     disconnect
 }
 
