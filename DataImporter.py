@@ -89,13 +89,15 @@ with open("food.csv", "r", encoding="UTF-8") as file:
 		
 		food_name = row["food"]
 		food_price = row["price"] # number, so doesn't need quotes despite null possibility
+		meal_time = row["meal_time"]
 		is_vegan = add_quotes(row["vegan"])
 		is_vegetarian = add_quotes(row["vegetarian"])
 		has_gluten = add_quotes(row["gluten"])
 		has_dairy = add_quotes(row["dairy"])
 		has_eggs = add_quotes(row["eggs"])
-		data_string = "INSERT INTO food VALUES (%s, '%s', '%s', %s, %s, %s, %s, %s, %s);" % \
-			(food_id, location, food_name, food_price, is_vegan, is_vegetarian, has_gluten, has_dairy, has_eggs)
+		data_string = "INSERT INTO food VALUES (%s, '%s', '%s', '%s', %s, %s, %s, %s, %s, %s);" % \
+			(food_id, location, food_name, food_price, meal_time, is_vegan, is_vegetarian, has_gluten,\
+	 has_dairy, has_eggs)
 		
 		try: 
 			cursor.execute(data_string)

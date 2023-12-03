@@ -142,22 +142,23 @@ function populateFoodTable(results) {
     }
 
     // Define headers
-    const headers = ["Location", "Food"];
+    //const headers = ["Location", "Food"];
 
     // Create and append the header row
-    let headerRow = createRowWithCells(headers, 'th');
-    table.appendChild(headerRow);
+    //let headerRow = createRowWithCells(headers, 'th');
+    //table.appendChild(headerRow);
 
     // Create and append rows for each result
     results.forEach(element => {
 
         // Map the element properties to match the headers order
         const foodData = [
-            element.loc_name,
             element.food_name,
+            element.loc_name,
         ];
         let dataRow = createRowWithCells(foodData, 'td'); // Will display 'no data' for null values
         table.appendChild(dataRow);
     });
 
 }
+
