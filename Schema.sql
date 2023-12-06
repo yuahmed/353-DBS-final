@@ -4,11 +4,6 @@ CREATE SCHEMA Dining;
 
 USE Dining;
 
-CREATE TABLE location (
-	loc_name VARCHAR(15),
-	PRIMARY KEY (loc_name)
-);
-
 CREATE TABLE food (
 	food_id INT, 
 	loc_name VARCHAR(15),
@@ -20,7 +15,6 @@ CREATE TABLE food (
 	has_gluten VARCHAR(1),
 	has_dairy VARCHAR(1),
 	has_eggs VARCHAR(1),
-	FOREIGN KEY (loc_name) REFERENCES location(loc_name),
 	PRIMARY KEY (food_id)
 );
 

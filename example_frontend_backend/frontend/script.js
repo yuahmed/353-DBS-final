@@ -134,7 +134,12 @@ function fetchFoodData() {
 function populateFoodTable(results) {
     let table = document.getElementById("foodTable");
     table.innerHTML = ''; // Clear the table
-
+    let thead = document.createElement('thead');
+    thead.innerHTML = '<th col-index = 1>Food</th>\
+    <th col-index = 2>Location <select class="table-filter" onchange="filter_rows()">\
+        <option value="all"></option></select></th>';
+    table.appendChild(thead);
+    let tbody = document.createElement('tbody');
     // If the queried table is empty, display error
     if (results.length === 0) {
         alert("No results found. Make sure to enter valid data");
@@ -148,6 +153,7 @@ function populateFoodTable(results) {
     //let headerRow = createRowWithCells(headers, 'th');
     //table.appendChild(headerRow);
 
+
     // Create and append rows for each result
     results.forEach(element => {
 
@@ -157,8 +163,57 @@ function populateFoodTable(results) {
             element.loc_name,
         ];
         let dataRow = createRowWithCells(foodData, 'td'); // Will display 'no data' for null values
-        table.appendChild(dataRow);
+        tbody.appendChild(dataRow);
+    });
+    table.appendChild(tbody);
+}
+
+// Get unique values for the desired columns
+
+
+function filter_rows() {
+    allFilters = document.querySelectorAll(".table-filter")
+    var filter_value_dict = {}
+
+    allFilters.forEach((filter_i) => {
+        col_index = filter_i.parentElement.getAttribute('col-index')
+
+        value = filter_i.value
+        if (value != "all") {
+            filter_value_dict[col_index] = value;
+        }
     });
 
+    var col_cell_value_dict = {};
+
+    const rows = document.querySelectorAll("#foodTable tbody tr");
+    rows.forEach((row) => {
+        var display_row = true;
+
+        allFilters.forEach((filter_i) => {
+            col_index = filter_i.parentElement.getAttribute('col-index')
+            col_cell_value_dict[col_index] = row.querySelector("td:nth-child(" + col_index+ ")").innerHTML
+        })
+
+        for (var col_i in filter_value_dict) {
+            filter_value = filter_value_dict[col_i]
+            row_cell_value = col_cell_value_dict[col_i]
+            
+            if (row_cell_value.indexOf(filter_value) == -1 && filter_value != "all") {
+                display_row = false;
+                break;
+            }
+
+
+        }
+
+        if (display_row == true) {
+            row.style.display = "table-row"
+
+        } else {
+            row.style.display = "none"
+
+        }
+    })
 }
 
