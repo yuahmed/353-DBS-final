@@ -14,7 +14,7 @@ function connect() {
 // Setting up query for food data
 function foodQueryCallback(i_name, callback) {
     // make the string contain it instead of be it
-    connection.query("SELECT food_name, loc_name FROM (SELECT loc_name, food_id, food_name, CASE WHEN i_name LIKE ? THEN 1 ELSE 0 END AS is_ingredient FROM food NATURAL JOIN contains NATURAL JOIN ingredients) AS A GROUP BY food_id HAVING SUM(is_ingredient) >= 1", [i_name], (error, results, fields) => {
+    connection.query("SELECT food_name, loc_name FROM (SELECT loc_name, food_id, food_name, CASE WHEN i_name LIKE ? THEN 1 ELSE 0 END AS is_ingredient FROM food NATURAL JOIN contains NATURAL JOIN ingredient) AS A GROUP BY food_id HAVING SUM(is_ingredient) >= 1", [i_name], (error, results, fields) => {
         if (error) throw error;
         console.log(results)
         callback(results);

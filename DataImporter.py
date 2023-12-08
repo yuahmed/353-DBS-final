@@ -100,7 +100,7 @@ with open("food.csv", "r", encoding="UTF-8") as file:
 				break
 			if not i_name in i_dict:
 				i_dict[i_name] = ingredient_id
-				data_string =  "INSERT INTO ingredients VALUES (%s, '%s');" % (ingredient_id, i_name)
+				data_string =  "INSERT INTO ingredient VALUES (%s, '%s');" % (ingredient_id, i_name)
 				try: 
 					cursor.execute(data_string)
 				except mysql.connector.Error as error_descriptor:
@@ -113,8 +113,6 @@ with open("food.csv", "r", encoding="UTF-8") as file:
 				print("Double ingredient in food inserting tuple: {}".format(error_descriptor))
 		
 		food_id = food_id + 1
-
-
 
 
 

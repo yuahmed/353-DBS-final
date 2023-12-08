@@ -1,4 +1,8 @@
 /* Adds borders to tables */
 table, th, td, tr, tbody {
     border: 1px solid black;
+    font-family: arial, sans-serif;
+}
+body{
+    font-family: arial, sans-serif;
 }

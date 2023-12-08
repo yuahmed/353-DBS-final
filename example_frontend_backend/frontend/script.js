@@ -131,6 +131,8 @@ function fetchFoodData() {
 // }
 
 // Populates table with tournamnet information (same process as populatePlayerTable)
+
+// idea: do it with array somehow
 function populateFoodTable(results) {
     let table = document.getElementById("foodTable");
     table.innerHTML = ''; // Clear the table
@@ -138,7 +140,6 @@ function populateFoodTable(results) {
     thead.innerHTML = '<th col-index = 1>Food</th>\
     <th col-index = 2>Location <select class="table-filter" onchange="filter_rows()">\
         <option value="all"></option></select></th>';
-    table.appendChild(thead);
     let tbody = document.createElement('tbody');
     // If the queried table is empty, display error
     if (results.length === 0) {
@@ -166,6 +167,9 @@ function populateFoodTable(results) {
         tbody.appendChild(dataRow);
     });
     table.appendChild(tbody);
+    let script = document.getElementById("theFilter");
+    script.innerHTML = "window.onload = () => { console.log(document.querySelector(\"#foodTable > tbody > tr:nth-child(1) > td:nth-child(2) \").innerHTML);};getUniqueValuesFromColumn()"
+    table.appendChild(thead);
 }
 
 // Get unique values for the desired columns
@@ -216,4 +220,3 @@ function filter_rows() {
         }
     })
 }
-
