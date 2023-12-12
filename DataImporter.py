@@ -5,9 +5,7 @@ Authors: Oma Mika Hameed, Yumna Ahmed and Cole Vulpis
 """
 
 import csv
-import glob
 import mysql.connector
-from datetime import datetime
 
 # Read SQL file
 schema_file = open("Schema.sql", "r")
@@ -95,7 +93,7 @@ with open("food.csv", "r", encoding="UTF-8") as file:
 			print("Failed inserting tuple: {}".format(error_descriptor))
 
 		for i in range (91):
-			i_name = row[str(i)].lower()
+			i_name = row[str(i)] #already made lower case in csvEditor
 			if i_name == '':
 				break
 			if not i_name in i_dict:
@@ -110,7 +108,7 @@ with open("food.csv", "r", encoding="UTF-8") as file:
 			try: 
 				cursor.execute(data_string)
 			except mysql.connector.Error as error_descriptor:
-				print("Double ingredient in food inserting tuple: {}".format(error_descriptor))
+				print("Failed inserting tuple: {}".format(error_descriptor))
 		
 		food_id = food_id + 1
 
