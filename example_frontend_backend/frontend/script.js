@@ -36,7 +36,7 @@ function createRowWithCells(dataArray, cellType) {
     let row = document.createElement('tr');
     dataArray.forEach(text => {
         let cell = document.createElement(cellType);
-        cell.innerText = text || 'No data'; // Set 'No data' if the text is null
+        cell.innerText = text || 'Unknown'; // Set 'No data' if the text is null
         row.appendChild(cell);
     });
     return row;
@@ -139,7 +139,20 @@ function populateFoodTable(results) {
     let thead = document.createElement('thead');
     thead.innerHTML = '<th col-index = 1>Food</th>\
     <th col-index = 2>Location <select class="table-filter" onchange="filter_rows()">\
-        <option value="all"></option></select></th>';
+        <option value="all"></option></select></th>\
+        <th col-index = 3>Meal Time <select class="table-filter" onchange="filter_rows()">\
+        <option value="all"></option></select></th>\
+        <th col-index = 4>Vegan <select class="table-filter" onchange="filter_rows()">\
+        <option value="all"></option></select></th>\
+        <th col-index = 5>Vegetarian <select class="table-filter" onchange="filter_rows()">\
+        <option value="all"></option></select></th>\
+        <th col-index = 6>Contains Eggs <select class="table-filter" onchange="filter_rows()">\
+        <option value="all"></option></select></th>\
+        <th col-index = 7>Contains Dairy <select class="table-filter" onchange="filter_rows()">\
+        <option value="all"></option></select></th>\
+        <th col-index = 8>Contains Gluten <select class="table-filter" onchange="filter_rows()">\
+        <option value="all"></option></select></th>\
+        <th col-index= 9>Price </th>';
     let tbody = document.createElement('tbody');
     // If the queried table is empty, display error
     if (results.length === 0) {
@@ -162,22 +175,156 @@ function populateFoodTable(results) {
         const foodData = [
             element.food_name,
             element.loc_name,
+            mealTime(element.meal_time),
+            YNC(element.is_vegan),
+            YNC(element.is_vegetarian),
+            YNC(element.has_eggs),
+            YNC(element.has_dairy),
+            YNC(element.has_gluten),
+            toSwipes(element.food_price),
         ];
         let dataRow = createRowWithCells(foodData, 'td'); // Will display 'no data' for null values
         tbody.appendChild(dataRow);
     });
     table.appendChild(tbody);
     let script = document.getElementById("theFilter");
-    script.innerHTML = "window.onload = () => { console.log(document.querySelector(\"#foodTable > tbody > tr:nth-child(1) > td:nth-child(2) \").innerHTML);};getUniqueValuesFromColumn()"
+    //script.innerHTML = "window.onload = () => { console.log(document.querySelector(\"#foodTable > tbody > tr:nth-child(1) > td:nth-child(2) \").innerHTML);};getUniqueValuesFromColumn()"
     table.appendChild(thead);
+    getUniqueValuesFromColumn();
+}
+
+// make sure the CSV is correct
+function YNC(char){
+    if(char == "Y"){
+        return "Yes";
+    }
+    if(char == "N"){
+        return "No";
+    }
+    if(char == "C"){
+        "Customizable"
+    }
+    if(char == "T"){
+        "Contains Traces"
+    }
+    return char;
+}
+
+function mealTime(time){
+    if (time == "B"){
+        return "Breakfast";
+    }
+    if (time == "L"){
+        return "Lunch";
+    }
+    if (time == "D"){
+        return "Dinner";
+    }
+    if (time == "L;D"){
+        return "Lunch & Dinner";
+    }
+    if (time == "B;L;D"){
+        return "Breakfast, Lunch & Dinner";
+    }
+
+    return time;
+    
+}
+
+function toSwipes(price){
+    if(price == -1){
+        return "Meal Swipe";
+    }
+    return price;
+
 }
 
 // Get unique values for the desired columns
 
 
+function getUniqueValuesFromColumn() {
+
+    var unique_col_values_dict = {};
+    unique_col_values_dict[2] = new Array("Davis Cafe");
+    unique_col_values_dict[2].push("Vail Commons");
+    unique_col_values_dict[2].push("Wildcat Den");
+    unique_col_values_dict[2].push("Qdoba");
+
+    unique_col_values_dict[3] = new Array("Breakfast");
+    unique_col_values_dict[3].push("Lunch");
+    unique_col_values_dict[3].push("Dinner");
+    
+
+    for(let i = 4; i <= 8; i++){
+        unique_col_values_dict[i] = new Array("Yes");
+        unique_col_values_dict[i].push("No");
+        unique_col_values_dict[i].push("Customizable");
+        unique_col_values_dict[i].push("Contains Traces");
+        unique_col_values_dict[i].push("Unknown");
+    }
+
+
+    // allFilters = document.querySelectorAll(".table-filter");
+    // allFilters.forEach((filter_i) => {
+    //     col_index = filter_i.parentElement.getAttribute("col-index");
+    //     // alert(col_index)
+    //     const rows = document.querySelectorAll("#foodTable");
+
+    //     rows.forEach((row) => {
+    //         cell_value = row.querySelector("td:nth-child("+col_index+")").innerHTML;
+    //         // if the col index is already present in the dict
+    //         if (col_index in unique_col_values_dict) {
+
+    //             // if the cell value is already present in the array
+    //             if (unique_col_values_dict[col_index].includes(cell_value)) {
+    //                 // alert(cell_value + " is already present in the array : " + unique_col_values_dict[col_index])
+
+    //             } else {
+    //                 unique_col_values_dict[col_index].push(cell_value)
+    //                 // alert("Array after adding the cell value : " + unique_col_values_dict[col_index])
+
+    //             }
+
+
+    //         } else {
+    //             unique_col_values_dict[col_index] = new Array(cell_value)
+    //         }
+    //     });
+
+        
+    // });
+
+    // for(i in unique_col_values_dict) {
+    //     alert("Column index : " + i + " has Unique values : \n" + unique_col_values_dict[i]);
+    // }
+
+    updateSelectOptions(unique_col_values_dict);
+
+};
+
+// Add <option> tags to the desired columns based on the unique values
+
+function updateSelectOptions(unique_col_values_dict) {
+    allFilters = document.querySelectorAll(".table-filter");
+
+    allFilters.forEach((filter_i) => {
+        col_index = filter_i.parentElement.getAttribute('col-index')
+
+        unique_col_values_dict[col_index].forEach((i) => {
+            filter_i.innerHTML = filter_i.innerHTML + `\n<option value="${i}">${i}</option>`
+        });
+
+    });
+};
+
+
+// Create filter_rows() function
+
+// filter_value_dict {2 : Value selected, 4:value, 5: value}
+
 function filter_rows() {
-    allFilters = document.querySelectorAll(".table-filter")
-    var filter_value_dict = {}
+    allFilters = document.querySelectorAll(".table-filter");
+    var filter_value_dict = {};
 
     allFilters.forEach((filter_i) => {
         col_index = filter_i.parentElement.getAttribute('col-index')
@@ -190,7 +337,7 @@ function filter_rows() {
 
     var col_cell_value_dict = {};
 
-    const rows = document.querySelectorAll("#foodTable");
+    const rows = document.querySelectorAll("#foodTable tbody tr");
     rows.forEach((row) => {
         var display_row = true;
 
@@ -207,15 +354,13 @@ function filter_rows() {
                 display_row = false;
                 break;
             }
-
         }
 
         if (display_row == true) {
-            row.style.display = "table-row"
+            row.style.display = "table-row";
 
         } else {
-            row.style.display = "none"
-
+            row.style.display = "none";
         }
     })
 }
