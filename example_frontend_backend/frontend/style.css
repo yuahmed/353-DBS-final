@@ -1,8 +1,25 @@
+body{
+    font-family: 'DM Sans', sans-serif;
+}
+
+.timings {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
 /* Adds borders to tables */
 table, th, td, tr, tbody {
     border: 1px solid black;
-    font-family: arial, sans-serif;
-}
-body{
     font-family: arial, sans-serif;
 }

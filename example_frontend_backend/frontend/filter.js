@@ -6,11 +6,11 @@ function getUniqueValuesFromColumn() {
 
     var unique_col_values_dict = {}
 
-    allFilters = document.querySelectorAll(".table-filter")
+    allFilters = document.querySelectorAll(".table-filter");
     allFilters.forEach((filter_i) => {
         col_index = filter_i.parentElement.getAttribute("col-index");
         // alert(col_index)
-        const rows = document.querySelectorAll("#foodTable > tbody > tr")
+        const rows = document.querySelectorAll("#foodTable");
 
         rows.forEach((row) => {
             cell_value = row.querySelector("td:nth-child("+col_index+")").innerHTML;
@@ -96,8 +96,6 @@ function filter_rows() {
                 display_row = false;
                 break;
             }
-
-
         }
 
         if (display_row == true) {
@@ -105,7 +103,6 @@ function filter_rows() {
 
         } else {
             row.style.display = "none"
-
         }
     })
 }

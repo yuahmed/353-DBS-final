@@ -190,7 +190,7 @@ function filter_rows() {
 
     var col_cell_value_dict = {};
 
-    const rows = document.querySelectorAll("#foodTable tbody tr");
+    const rows = document.querySelectorAll("#foodTable");
     rows.forEach((row) => {
         var display_row = true;
 
@@ -207,7 +207,6 @@ function filter_rows() {
                 display_row = false;
                 break;
             }
-
 
         }
 
