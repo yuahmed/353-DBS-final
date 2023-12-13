@@ -71,64 +71,21 @@ function fetchFoodData() {
     );
 }
 
-// // Display sorting buttons --> will become filter buttons
-// document.getElementById('sortDrawBtn').addEventListener('click', sortByDrawSize);
-// document.getElementById('reverseSortDrawBtn').addEventListener('click', reverseSortByDrawSize);
-// document.getElementById('sortNameBtn').addEventListener('click', sortByName);
-// document.getElementById('reverseSortNameBtn').addEventListener('click', reverseSortByName);
-// document.getElementById('sortDateBtn').addEventListener('click', sortByStartDate);
-// document.getElementById('reverseSortDateBtn').addEventListener('click', reverseSortByStartDate);
-// document.getElementById('sortLevelBtn').addEventListener('click', sortByLevel);
-// document.getElementById('reverseSortLevelBtn').addEventListener('click', reverseSortByLevel);
+// Display sorting buttons
+document.getElementById('sortPriceBtn').addEventListener('click', sortByPrice);
+document.getElementById('reverseSortPriceBtn').addEventListener('click', reverseSortByPrice);
 
-// // Sort alphabetically by name
-// function sortByName() {
-//     tournamentData.sort((a, b) => a.tourney_name.localeCompare(b.tourney_name));
-//     populateTourneyTable(tournamentData);
-// }
+// Sort by price (numerical increasing order)
+function sortByPrice() {
+    foodData.sort((a, b) => a.food_price - b.food_price);
+    populateFoodTable(foodData);
+}
 
-// // Reverse sort alphabetically by name
-// function reverseSortByName() {
-//     tournamentData.sort((a, b) => b.tourney_name.localeCompare(a.tourney_name));
-//     populateTourneyTable(tournamentData);
-// }
-
-// // Sort by draw size (numerical increasing order)
-// function sortByDrawSize() {
-//     tournamentData.sort((a, b) => a.draw_size - b.draw_size);
-//     populateTourneyTable(tournamentData);
-// }
-
-// // Reverse sort by draw size
-// function reverseSortByDrawSize() {
-//     tournamentData.sort((a, b) => b.draw_size - a.draw_size);
-//     populateTourneyTable(tournamentData);
-// }
-
-
-// // Sort by start date (chronological)
-// function sortByStartDate() {
-//     tournamentData.sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
-//     populateTourneyTable(tournamentData);
-// }
-
-// // Reverse sort by start date
-// function reverseSortByStartDate() {
-//     tournamentData.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
-//     populateTourneyTable(tournamentData);
-// }
-
-// // Sort by level (alphabetical)
-// function sortByLevel() {
-//     tournamentData.sort((b, a) => b.level.localeCompare(a.level));
-//     populateTourneyTable(tournamentData);
-// }
-
-// // Reverse sort by level
-// function reverseSortByLevel() {
-//     tournamentData.sort((a, b) => b.level.localeCompare(a.level));
-//     populateTourneyTable(tournamentData);
-// }
+// Reverse sort by price
+function reverseSortByPrice() {
+    foodData.sort((a, b) => b.food_price - a.food_price);
+    populateFoodTable(foodData);
+}
 
 // Populates table with tournamnet information (same process as populatePlayerTable)
 
@@ -152,7 +109,8 @@ function populateFoodTable(results) {
         <option value="all"></option></select></th>\
         <th col-index = 8>Contains Gluten <select class="table-filter" onchange="filter_rows()">\
         <option value="all"></option></select></th>\
-        <th col-index= 9>Price </th>';
+        <th col-index = 9>Price <select class="table-filter" onchange="filter_rows()">\
+        <option value="all"></option></select></th>';
     let tbody = document.createElement('tbody');
     // If the queried table is empty, display error
     if (results.length === 0) {
@@ -202,10 +160,10 @@ function YNC(char){
         return "No";
     }
     if(char == "C"){
-        "Customizable"
+        return "Customizable";
     }
     if(char == "T"){
-        "Contains Traces"
+        return "Contains Traces";
     }
     return char;
 }
@@ -262,6 +220,10 @@ function getUniqueValuesFromColumn() {
         unique_col_values_dict[i].push("Contains Traces");
         unique_col_values_dict[i].push("Unknown");
     }
+
+    unique_col_values_dict[9] = new Array("Meal Swipe");
+    unique_col_values_dict[9].push("Unknown");
+    unique_col_values_dict[9].push(".")
 
 
     // allFilters = document.querySelectorAll(".table-filter");

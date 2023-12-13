@@ -109,14 +109,14 @@
 		<div class="container">
 			<div class="row mt-4">
 				<h3> Food Data</h3>
-				<p> Please insert the ingredient you want in your food.
+				<p> Step 1. Insert the ingredient you want in your food.
 				<p>
 				<p> NOTE: <br> This shows all foods with an ingredient that contains what you typed. For example, if you
 					type
 					"let,"
 					it will show foods with "lettuce".
 				<p>
-				<p> TIP: Type nothing to display all foods. </p>
+				<p> TIP: Type nothing and click the button to display all foods. </p>
 
 				<form id="foodForm">
 					<label for="i_name">Ingredient Name:</label>
@@ -124,128 +124,15 @@
 					<button type="button" class="btn btn-success mt-4" id="foodFetchBtn">Click here to display food
 						information</button>
 				</form>
-				<!-- Buttons for sorting.
-				<button id="sortNameBtn">Sort by Name</button>
-				<button id="reverseSortNameBtn">Reverse Sort by Name</button>
-				<button id="sortDrawBtn">Sort by Draw Size</button>
-				<button id="reverseSortDrawBtn">Reverse Sort by Draw Size</button>
-				<button id="sortDateBtn">Sort by Date</button>
-				<button id="reverseSortDateBtn">Reverse Sort by Date</button>
-				<button id="sortLevelBtn">Sort by Level</button>
-				<button id="reverseSortLevelBtn">Reverse Sort by Level</button> -->
+				<!-- Buttons for sorting. -->
+				<p> Step 2. Sort table by price, if you choose.</p>
+				<button id="sortPriceBtn">Sort by Price</button>
+				<br>
+				<button id="reverseSortPriceBtn">Reverse Sort by Price</button>
 
+				<p> Step 3. Narrow your search using filters.</p>
 				<table id="foodTable" class="mt-5">
-					<!-- <thead>
-						<th col-index=1>Employee ID</th>
-						<th col-index=2>Gender
-							<select class="table-filter" onchange="filter_rows()">
-								<option value="all"></option>
-							</select>
-						</th>
-
-						<th col-index=3>Department
-							<select class="table-filter" onchange="filter_rows()">
-								<option value="all"></option>
-							</select>
-						</th>
-						<th col-index=4>Status
-							<select class="table-filter" onchange="filter_rows()">
-								<option value="all"></option>
-							</select>
-						</th>
-						<th col-index=5>Office
-							<select class="table-filter" onchange="filter_rows()">
-								<option value="all"></option>
-							</select>
-						</th>
-
-					</thead>
-					<tbody>
-						<tr>
-							<td>101</td>
-							<td>M</td>
-							<td>RnD</td>
-							<td>Online</td>
-							<td>Site 1</td>
-						</tr>
-						<tr>
-							<td>102</td>
-							<td>M</td>
-							<td>RnD</td>
-							<td>On Leave</td>
-							<td>Site 1</td>
-						</tr>
-						<tr>
-							<td>103</td>
-							<td>F</td>
-							<td>RnD</td>
-							<td>Online</td>
-							<td>Site 1</td>
-						</tr>
-						<tr>
-							<td>104</td>
-							<td>F</td>
-							<td>Engineering</td>
-							<td>Online</td>
-							<td>Site 1</td>
-						</tr>
-						<tr>
-							<td>201</td>
-							<td>F</td>
-							<td>Engineering</td>
-							<td>On Leave</td>
-							<td>Site 2</td>
-						</tr>
-						<tr>
-							<td>202</td>
-							<td>F</td>
-							<td>Engineering</td>
-							<td>Online</td>
-							<td>Site 2</td>
-						</tr>
-						<tr>
-							<td>203</td>
-							<td>M</td>
-							<td>Engineering</td>
-							<td>Online</td>
-							<td>Site 2</td>
-						</tr>
-						<tr>
-							<td>204</td>
-							<td>M</td>
-							<td>Design</td>
-							<td>Online</td>
-							<td>Site 2</td>
-						</tr>
-						<tr>
-							<td>301</td>
-							<td>F</td>
-							<td>Support</td>
-							<td>Online</td>
-							<td>Site 3</td>
-						</tr>
-						<tr>
-							<td>302</td>
-							<td>F</td>
-							<td>Support</td>
-							<td>Online</td>
-							<td>Site 3</td>
-						</tr>
-						<tr>
-							<td>303</td>
-							<td>M</td>
-							<td>Support</td>
-							<td>Terminated</td>
-							<td>Site 3</td>
-						</tr>
-						<tr>
-							<td>304</td>
-							<td>M</td>
-							<td>Support</td>
-							<td>On Leave</td>
-							<td>Site 3</td>
-						</tr>
-					</tbody> -->
+					
 				</table>
 			</div>
 		</div>
@@ -257,21 +144,8 @@
 		<p> Email us at pivarghese@davidson.edu or call us at 704-894-2076</p>
 	</div>
 
-	<!-- <script src="./filter.js"></script> -->
-
 	<script src="script.js"></script>
 	
-	<!-- <script>getUniqueValuesFromColumn()
-		</script>
-	<script id="theFilter">
-		window.onload = () => {
-			console.log(document.querySelector("#foodTable > tbody > tr:nth-child(1) > td:nth-child(2) ").innerHTML);
-		};
-
-		getUniqueValuesFromColumn()
-
-	</script> -->
-
 </body>
 
 </html>
