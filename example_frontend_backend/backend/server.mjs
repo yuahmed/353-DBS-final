@@ -19,6 +19,15 @@ app.get('/foods', function (request, response) {
     })
 });
 
+// Get results from user requests and perform queries
+app.get('/ingredients', function (request, response) {
+    let f_name = request.query.f_name
+    db.ingredientQueryCallback(f_name, (results) => {
+        response.json(results)
+        //console.log(results);
+    })
+});
+
 // Starting server; disconnecting from database upon exit
 app.listen(port, () => console.log('Server is starting on PORT,', port))
 process.on('exit', () => {

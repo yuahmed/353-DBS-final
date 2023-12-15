@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-	<title>Davidson Dining</title>
+	<title>DC DS DB</title>
 	<meta charset="utf-8">
 
 	<!-- Bootstrap CSS -->
@@ -17,55 +17,46 @@
 </head>
 
 <body>
-	<!-- Functionality we may want:
-	1. filtering system to get rid OR have  all options you may not want OR want (allergies, locations, ingredient filterer)
-	2. can click food in table to get other page/drop down/hover menu with more information
-	3. pretty front page that has basic information about dining services (times, links to daily, menu, etc.)
-	4. suggestions box
-	5. list items by user's available budget
-
-
-	a summary:
-		front page,
-			davidson college (logo)
-			socials
-			grubhub 
-		food page,
-		contact us (suggestions) page,
-	-->
-
-	<!-- home section: to be done -->
 	<div id="homeSection">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 mt-4">
-					<h3 class="text-center">A Database for Davidson College's Dining Services. </h3>
-					<p class="mt-4">Filterable by Allergies, Preferences, Dining Locations, and more!</p>
-					<p>Nutrition, variety, freshness, and sustainability are our top priorities.</p>
-					<p> Satisfy your cravings with our wide range of dining options. Our selection ensures guests find
+					<h2 class="text-center"> <strong>Database for Davidson College's Dining Services.</strong></h2>
+					<h5 class="mt-4"><strong> Filterable by Allergies, Preferences, Dining Locations, and more!</strong>
+					</h5>
+					<h5>Nutrition, variety, freshness, and sustainability are our top priorities.</h5>
+					<h5> Satisfy your cravings with our wide range of dining options. Our selection ensures guests find
 						what they
 						want to eat, whenever they want.
-					</p>
+					</h5>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row mt-3">
 				<div class="col-4">
 					<div class="d-flex flex-column align-items-center">
 						<!--Buttons for chosing sections.-->
 						<button type="button" class="btn btn-info" id="homeBtn"> Home </button>
 					</div>
+					<p style="text-align: center;">
+						<img src="img\dbf_3.png" width="250px" height="200px" class="mt-3">
+					</p>
 				</div>
 
 				<div class="col-4">
 					<div class="d-flex flex-column align-items-center">
 						<button type="button" class="btn btn-info" id="foodBtn"> Foods </button>
 					</div>
+					<p style="text-align: center;">
+						<img src="img\dbf_2.jpg" width="250px" height="200px" class="mt-3">
+					</p>
 				</div>
 				<div class="col-4">
 					<div class="d-flex flex-column align-items-center">
 						<button type="button" class="btn btn-info" id="contactBtn"> Contact </button>
-
 					</div>
+					<p style="text-align: center;">
+						<img src="img\dbf_1.jpeg" width="250px" height="200px" class="mt-3">
+					</p>
 				</div>
 			</div>
 
@@ -73,7 +64,7 @@
 				<div class="col-12">
 					<h2 class="mt-4">Dining Hours</h2>
 
-					<table class="timings">
+					<table class="timings mb-5">
 						<tr>
 							<th>Dining Location</th>
 							<th>Hours</th>
@@ -108,14 +99,13 @@
 	<div id="foodSection" style="display: none;">
 		<div class="container">
 			<div class="row mt-4">
-				<h3> Food Data</h3>
-				<p> Step 1. Insert the ingredient you want in your food.
-				<p>
-				<p> NOTE: <br> This shows all foods with an ingredient that contains what you typed. For example, if you
+				<h3>Food Data</h3>
+				<p><strong>Step 1. Insert the ingredient you want in your food.</strong></p>
+				<p> NOTE: <br>This shows all foods with an ingredient that contains what you typed. For example, if you
 					type
 					"let,"
 					it will show foods with "lettuce".
-				<p>
+				</p>
 				<p> TIP: Type nothing and click the button to display all foods. </p>
 
 				<form id="foodForm">
@@ -125,27 +115,48 @@
 						information</button>
 				</form>
 				<!-- Buttons for sorting. -->
-				<p> Step 2. Sort table by price, if you choose.</p>
-				<button id="sortPriceBtn">Sort by Price</button>
-				<br>
-				<button id="reverseSortPriceBtn">Reverse Sort by Price</button>
-
-				<p> Step 3. Narrow your search using filters.</p>
-				<table id="foodTable" class="mt-5">
-					
-				</table>
+				<p class="mt-3"> <strong> Step 2. Sort table by price, if you choose. </strong></p>
 			</div>
+			<div class="row mt-2">
+				<div class="col-4">
+					<button id="sortPriceBtn" class="btn btn-info">Sort by Price: Low to High</button>
+				</div>
+				<div class="col-4"></div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row mt-2">
+				<div class="col-4">
+					<button id="reverseSortPriceBtn" class="btn btn-info">Sort by Price: High to Low</button>
+
+				</div>
+				<div class="col-4"></div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row mt-2">
+				<p><strong> Step 3. Narrow your search using filters.</strong></p>
+
+				<p><strong>Step 4. Click item names in the "Food" Column to view their ingredients.</strong> </p>
+				<table id="foodTable" class="mt-5 mb-5"></table>
+			</div>
+
 		</div>
 	</div>
 
 	<!-- Contact Section (hidden by default) -->
-	<div id="contactSection" style="display: none;">
-		<h1> Want to contact us? </h1>
-		<p> Email us at pivarghese@davidson.edu or call us at 704-894-2076</p>
+	<div class="container">
+		<div class="row mt-3">
+			<div id="contactSection" style="display: none;">
+				<h1> Want to contact us? </h1>
+				<br>
+				<p> Email us at pivarghese@davidson.edu or call us at 704-894-2076.</p>
+				<br>
+				<p> Or, check out more resources <a href="https://www.davidson.edu/offices-and-services/dining-services/meet-staff">here</a>!</p>
+			</div>
+		</div>
 	</div>
 
 	<script src="script.js"></script>
-	
+
 </body>
 
 </html>

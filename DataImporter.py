@@ -1,5 +1,5 @@
 """
-Populates MySQL database information from CSV files
+Populates MySQL database information from CSV file
 
 Authors: Oma Mika Hameed, Yumna Ahmed and Cole Vulpis
 """
@@ -37,7 +37,6 @@ except mysql.connector.Error as error_descriptor:
 	print("Failed using database: {}".format(error_descriptor))
 	exit(1)
 
-# Run the content of Tennis.sql
 # Run the content of Schema.sql
 try:
 	for result in cursor.execute(schema_string, multi=True):
