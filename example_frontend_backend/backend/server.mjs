@@ -11,7 +11,7 @@ db.connect();
 // Serve static HTML files in the current directory (called '.')
 app.use(express.static(path.join(path.resolve(), '../frontend')));
 
-// Get results from user requests and perform queries
+// Get results from user requests for food and perform query
 app.get('/foods', function (request, response) {
     let i_name = request.query.i_name
     db.foodQueryCallback(i_name, (results) => {
@@ -19,12 +19,11 @@ app.get('/foods', function (request, response) {
     })
 });
 
-// Get results from user requests and perform queries
+// Get results from user requests for ingredients and perform query
 app.get('/ingredients', function (request, response) {
     let f_name = request.query.f_name
     db.ingredientQueryCallback(f_name, (results) => {
         response.json(results)
-        //console.log(results);
     })
 });
 

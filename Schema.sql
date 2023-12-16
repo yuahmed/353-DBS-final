@@ -11,11 +11,9 @@ CREATE TABLE food (
 	food_name VARCHAR(50),
 	food_price NUMERIC(4,2),
 	meal_time VARCHAR(5) check (meal_time = 'B' OR meal_time = 'L' OR meal_time = 'D' OR
-									meal_time = 'B;L' OR meal_time = 'B;D' OR meal_time = 'L;D' OR
-										meal_time = 'B;L;D'),
-	is_vegan VARCHAR(1) check (is_vegan = 'Y' OR is_vegan = 'N' OR is_vegan = 'C' OR is_vegan = 'T'),
-	is_vegetarian VARCHAR(1) check (is_vegetarian = 'Y' OR is_vegetarian = 'N' OR is_vegetarian = 'C'
-										 OR is_vegetarian = 'T'),
+									meal_time = 'L;D' OR meal_time = 'B;L;D'),
+	is_vegan VARCHAR(1) check (is_vegan = 'Y' OR is_vegan = 'N' OR is_vegan = 'C'),
+	is_vegetarian VARCHAR(1) check (is_vegetarian = 'Y' OR is_vegetarian = 'N' OR is_vegetarian = 'C'),
 	has_gluten VARCHAR(1) check (has_gluten = 'Y' OR has_gluten = 'N' OR has_gluten = 'C' OR 
 									has_gluten = 'T'),
 	has_dairy VARCHAR(1) check (has_dairy = 'Y' OR has_dairy = 'N' OR has_dairy = 'C' OR 

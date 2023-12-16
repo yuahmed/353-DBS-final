@@ -58,25 +58,26 @@ except mysql.connector.Error as error_descriptor:
 	print("Failed using database: {}".format(error_descriptor))
 	exit(1)
 
-# could have food_map = {}, but two foods with the same name could have different ingredients
-
-locations = set()
+# function for adding quotes around non-null Strings
 def add_quotes(str):
 	if str == "NULL":
 		return str 
 	else:
 		return "'" + str + "'"
 
+# Will ingredient names to id for revisisted ingredients
 i_dict = {}
-food_id = 0
-ingredient_id = 0
+food_id = 0 # incremented
+ingredient_id = 0 # incremented
 with open("food.csv", "r", encoding="UTF-8") as file:
 	csvreader = csv.DictReader(file)
 	for row in csvreader:
-		location = row["location"]
-		food_name = row["food"]
+
+		# insert all values for food table
+		location = row["location"] # won't be null
+		food_name = row["food"] # won't be null
 		food_price = row["price"] # number, so doesn't need quotes despite null possibility
-		meal_time = row["time"]
+		meal_time = row["time"] # won't be null
 		is_vegan = add_quotes(row["vegan"])
 		is_vegetarian = add_quotes(row["vegetarian"])
 		has_gluten = add_quotes(row["gluten"])
@@ -91,24 +92,28 @@ with open("food.csv", "r", encoding="UTF-8") as file:
 		except mysql.connector.Error as error_descriptor:
 			print("Failed inserting tuple: {}".format(error_descriptor))
 
+		# insert all unique ingredients until we get to end of ingredients list
 		for i in range (91):
 			i_name = row[str(i)] #already made lower case in csvEditor
 			if i_name == '':
 				break
 			if not i_name in i_dict:
-				i_dict[i_name] = ingredient_id
+				i_dict[i_name] = ingredient_id # map name to current id
 				data_string =  "INSERT INTO ingredient VALUES (%s, '%s');" % (ingredient_id, i_name)
 				try: 
 					cursor.execute(data_string)
 				except mysql.connector.Error as error_descriptor:
 					print("Failed inserting tuple: {}".format(error_descriptor))
-				ingredient_id = ingredient_id + 1
+				ingredient_id = ingredient_id + 1 # new ingredient so increment
+			
+			# Add food id to ingredient id of ingredient
 			data_string = "INSERT INTO contains VALUES (%s, %s);" % (food_id, i_dict[i_name])
 			try: 
 				cursor.execute(data_string)
 			except mysql.connector.Error as error_descriptor:
 				print("Failed inserting tuple: {}".format(error_descriptor))
 		
+		# each row is a food, so now we increment
 		food_id = food_id + 1
 
 
