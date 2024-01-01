@@ -20,7 +20,9 @@ The current filters include:
 4. Run the `DataImporter.py` code file to populate the data.
 5. In a new VS Code window, open the `example_frontend_backend` folder. Navigate to the debugger from the side panel.
 6. From the dropdown menu in the debugger, first run the `Backend - Server` option and then the `Frontend - Server`.
+   
 ![menu](debugMenu.png)
+
 7. The website should appear in a browser pop up window and can be used. 
 
 # Software Needed to Run the Website
